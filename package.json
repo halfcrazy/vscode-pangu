@@ -4,6 +4,10 @@
     "description": "add whitespace",
     "version": "0.0.1",
     "publisher": "halfcrazy",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/halfcrazy/vscode-pangu"
+    },
     "engines": {
         "vscode": "^1.14.0"
     },
