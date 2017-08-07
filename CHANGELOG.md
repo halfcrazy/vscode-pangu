@@ -1,7 +1,14 @@
 # Change Log
-All notable changes to the "pangu-spacing" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 0.1 2017-08-01
+1. Tweak commands
+2. Support configure pangu to auto add whitespace
+    Example:
+    ``` JS
+    {
+      "pangu.auto_space_on_save": true
+    }
+    ```
 
-## [Unreleased]
-- Initial release
+## 0.0.1 2017-07-28
+First publish

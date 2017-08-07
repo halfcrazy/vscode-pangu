@@ -2,7 +2,7 @@
     "name": "pangu",
     "displayName": "pangu",
     "description": "add whitespace",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "halfcrazy",
     "repository": {
         "type": "git",
@@ -15,16 +15,31 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.pangu"
+        "*"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.pangu",
-                "title": "Pangu"
+                "command": "extension.add_space",
+                "title": "Pangu: Add whitespace for selection"
+            },
+            {
+                "command": "extension.add_space_all",
+                "title": "Pangu: Add whitespace for all"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Pangu Configuration",
+            "properties": {
+                "pangu.auto_space_on_save": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Auto add whitespace for your inputs"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",

@@ -3,12 +3,14 @@ import pangu = require('pangu');
 
 export function activate(context: vscode.ExtensionContext) {
 
-    console.log("Congratulations, your extension 'pangu-spacing' is now active!");
+	console.log("Congratulations, your extension 'pangu' is now active!");
 
-    console.log(pangu)
-    var disposable = vscode.commands.registerCommand('extension.pangu', panguPlugin);
+	var add_space = vscode.commands.registerCommand('extension.add_space', addSpaceSelection);
+	var add_space_all = vscode.commands.registerCommand('extension.add_space_all', addSpaceAll);
 
-    context.subscriptions.push(disposable);
+	context.subscriptions.push(add_space);
+	context.subscriptions.push(add_space_all);
+	context.subscriptions.push(new Watcher());
 }
 
 function addSpace(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
@@ -20,39 +22,41 @@ function addSpace(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Sele
 		}
 	});
 }
+function addSpaceSelection() {
+	let e = vscode.window.activeTextEditor;
+	let d = e.document;
+	let sels = e.selections;
+	addSpace(e, d, sels);
+}
 
-function panguPlugin() {
-	
-	if (!vscode.window.activeTextEditor) {
-		vscode.window.showInformationMessage('Open a file first to call pangu');
-		return;
-	}      
-	
-	var opts: vscode.QuickPickOptions = { matchOnDescription: true, placeHolder: 'What do you want to do to the selection(s)?' };
-	var items: vscode.QuickPickItem[] = [];
+function addSpaceAll() {
+	let e = vscode.window.activeTextEditor;
+	let d = e.document;
+	let sel = new vscode.Selection(new vscode.Position(0, 0), new vscode.Position(Number.MAX_VALUE, Number.MAX_VALUE));
+	addSpace(e, d, [sel]);
+}
 
-	items.push({ label: 'add space', description: 'Add whitespace for your selection' });
-	items.push({ label: 'add space all', description: 'Add whitespace for your active window' });
+class Watcher {
+	private _disposable: vscode.Disposable;
+	private _config: vscode.WorkspaceConfiguration
 
-	vscode.window.showQuickPick(items).then((selection) => {
-		if (!selection) {
-			return;
+	public getConfig() {
+		this._config = vscode.workspace.getConfiguration('pangu');
+	}
+	constructor() {
+		this.getConfig()
+		if (this._config.get('auto_space_on_save', false)) {
+			let subscriptions: vscode.Disposable[] = [];
+			this._disposable = vscode.Disposable.from(...subscriptions);
+
+			vscode.workspace.onWillSaveTextDocument(this._onWillSaveDoc, this, subscriptions);
 		}
-		let e = vscode.window.activeTextEditor;
-		let d = e.document;
+	}
+	dispose() {
+		this._disposable.dispose();
+	}
 
-		switch (selection.label) {
-			case 'add space':
-                let sels = e.selections;
-				addSpace(e, d, sels);
-				break;
-            case 'add space all':
-                let sel = new vscode.Selection(new vscode.Position(0, 0), new vscode.Position(Number.MAX_VALUE, Number.MAX_VALUE));
-				addSpace(e, d, [sel]);
-				break;
-			default:
-				console.log('hum this should not have happend - no selection')
-				break;
-		}
-	});
+	_onWillSaveDoc(e) {
+		addSpaceAll()
+	}
 }

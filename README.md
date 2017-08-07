@@ -13,13 +13,22 @@ Open up VS Code and hit `F1` and type `ext` select Install Extension and type `p
 * Add whitespace for your selection
 * Add whitespace for whole active document
 
+## Commands
+
+- Pangu: Add whitespace for selection
+- Pangu: Add whitespace for all
+
+## Settings and defaults
+``` JS
+{
+    /* Auto add whitespace on save, default false */
+    "pangu.auto_space_on_save": false
+}
+```
+
 ## Known Issues
 
-
-## Release Notes
-
-### 0.0.1 2017-07-28
-First publish
-
+## Thanks
+Thanks [vinta](https://github.com/vinta) for his great job [pangu.js](https://github.com/vinta/pangu.js)
 
 **Enjoy!**
