@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import pangu = require('pangu');
 
-export function activate(context : vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
 	console.log("Congratulations, your extension 'pangu' is now active!");
 
 	var add_space = vscode.commands.registerCommand('extension.add_space', addSpaceSelection);
@@ -15,11 +15,11 @@ export function activate(context : vscode.ExtensionContext) {
 	context.subscriptions.push(_onSaveDisposable);
 }
 
-function addSpace(e : vscode.TextEditor, d : vscode.TextDocument, sel : vscode.Selection[]) {
+function addSpace(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
 	e.edit(function (edit) {
 		// itterate through the selections and convert all text to Lower
 		for (var x = 0; x < sel.length; x++) {
-				let txt : string = d.getText(new vscode.Range(sel[x].start, sel[x].end));
+				let txt: string = d.getText(new vscode.Range(sel[x].start, sel[x].end));
 				edit.replace(sel[x], pangu.spacing(txt));
 		}
 	});
@@ -44,21 +44,20 @@ function onDidSaveDoc(e) {
 }
 
 class Watcher {
-		private _disposable : vscode.Disposable;
-		private _config : vscode.WorkspaceConfiguration
+	private _disposable: vscode.Disposable;
+	private _config: vscode.WorkspaceConfiguration
 
-		public getConfig() {
-			this._config = vscode.workspace.getConfiguration('pangu');
+	public getConfig() {
+		this._config = vscode.workspace.getConfiguration('pangu');
+	}
+	constructor() {
+		this.getConfig()
+		if (this._config.get('auto_space_on_save', false)) {
+				let subscriptions: vscode.Disposable[] = [];
+				this._disposable = vscode.Disposable.from(...subscriptions);
 		}
-		constructor() {
-			this.getConfig()
-			if (this._config.get('auto_space_on_save', false)) {
-					let subscriptions : vscode.Disposable[] = [];
-					this._disposable = vscode.Disposable.from(...subscriptions);
-			}
-		}
-		dispose() {
-			this._disposable.dispose();
-		}
-
+	}
+	dispose() {
+		this._disposable.dispose();
+	}
 }
