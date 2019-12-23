@@ -22,7 +22,9 @@ Open up VS Code and hit `F1` and type `ext` select Install Extension and type `p
 ``` JS
 {
     /* Auto add whitespace on save, default false */
-    "pangu.auto_space_on_save": false
+    "pangu.auto_space_on_save": false,
+    /* The extension list for auto-save files, default [], * means all */
+    "pangu.auto_space_on_save_ext": [],
 }
 ```
 
