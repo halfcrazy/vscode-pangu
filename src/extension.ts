@@ -66,7 +66,7 @@ class Watcher {
 
 	_onDidSaveDoc(e: vscode.TextDocument) {
 		var ext = path.extname(e.fileName);
-		if (this._whitelist.includes('*' || this._whitelist.includes(ext))) {
+		if (this._whitelist.includes('*') || this._whitelist.includes(ext)) {
 			addSpaceAll();
 		}
 	}
