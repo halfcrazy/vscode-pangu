@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.4 2019-12-23
+1. Add back vscode debug files, and bugfix
+
 ## 0.1.3 2019-12-23
 1. Support configure pangu to auto add whitespace for specific extensions
     Example:
