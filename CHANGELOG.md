@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.5 2019-12-23
+1. Better file status for auto-save
+
 ## 0.1.4 2019-12-23
 1. Add back vscode debug files, and bugfix
 

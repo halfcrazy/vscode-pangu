@@ -2,7 +2,7 @@
   "name": "pangu",
   "displayName": "pangu",
   "description": "add whitespace",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "halfcrazy",
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
         "pangu.auto_space_on_save_ext": {
           "type": "array",
           "default": [],
-          "description": "The file ext for your auto pangu files"
+          "description": "The file ext for your auto pangu files, eg .md, .txt or *"
         }
       }
     }

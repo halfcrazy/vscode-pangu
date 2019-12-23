@@ -17,7 +17,10 @@ function addSpace(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Sele
 		// itterate through the selections and convert all text to Lower
 		for (var x = 0; x < sel.length; x++) {
 			let txt: string = d.getText(new vscode.Range(sel[x].start, sel[x].end));
-			edit.replace(sel[x], pangu.spacing(txt));
+			let parsed: string = pangu.spacing(txt);
+			if (txt !== parsed) {
+				edit.replace(sel[x], parsed);
+			}
 		}
 	});
 }
