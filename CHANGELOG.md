@@ -6,7 +6,7 @@
     ``` JS
     {
       "pangu.auto_space_on_save": true
-      "pangu.auto_space_on_save_ext": ["md"]
+      "pangu.auto_space_on_save_ext": [".md"]
     }
     ```
 
