@@ -14,7 +14,7 @@ export function deactivate() { }
 
 function addSpace(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
 	e.edit(function (edit: vscode.TextEditorEdit) {
-		// itterate through the selections and convert all text to Lower
+		// iterate through the selections and convert all text to Lower
 		for (var x = 0; x < sel.length; x++) {
 			let txt: string = d.getText(new vscode.Range(sel[x].start, sel[x].end));
 			let parsed: string = pangu.spacing(txt);
@@ -37,6 +37,7 @@ function addSpaceAll() {
 	let e = vscode.window.activeTextEditor;
 	if (e) {
 		let d = e.document;
+		// TODO: to get sel from all comments or string text we need generate ast from the text. antrl4 has some defined grammer
 		let sel = new vscode.Selection(new vscode.Position(0, 0), new vscode.Position(Number.MAX_VALUE, Number.MAX_VALUE));
 		addSpace(e, d, [sel]);
 	}
