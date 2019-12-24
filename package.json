@@ -2,7 +2,7 @@
   "name": "pangu",
   "displayName": "pangu",
   "description": "add whitespace",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "publisher": "halfcrazy",
   "repository": {
     "type": "git",
@@ -19,8 +19,7 @@
   ],
   "main": "./out/extension",
   "contributes": {
-    "commands": [
-      {
+    "commands": [{
         "command": "extension.add_space",
         "title": "Pangu: Add whitespace for selection"
       },

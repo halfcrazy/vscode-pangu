@@ -54,6 +54,7 @@ class Watcher {
 		this.getConfig();
 		if (this._config.get('auto_space_on_save', false)) {
 			this._whitelist = this._config.get('auto_space_on_save_ext', []);
+			this._whitelist = this._whitelist.map(i => i.toLowerCase());
 			if (this._whitelist.includes('*')) {
 				this._whitelist = ['*'];
 			}
@@ -68,8 +69,9 @@ class Watcher {
 	}
 
 	_onDidSaveDoc(e: vscode.TextDocument) {
-		var ext = path.extname(e.fileName);
-		if (this._whitelist.includes('*') || this._whitelist.includes(ext)) {
+		var ext = path.extname(e.fileName).toLowerCase();
+		var ext_without_dot = ext.startsWith('.') ? ext.substr(1) : ext;
+		if (this._whitelist.includes('*') || this._whitelist.includes(ext) || this._whitelist.includes(ext_without_dot)) {
 			addSpaceAll();
 		}
 	}

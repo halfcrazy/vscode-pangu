@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.6 2019-12-23
+1. Support define file ext without dot
+
 ## 0.1.5 2019-12-23
 1. Better file status for auto-save
 
